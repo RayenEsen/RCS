@@ -1,0 +1,40 @@
+::ng-deep .p-card {
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.3s; /* Add a transition for smooth animation */
+}
+
+::ng-deep .p-card:hover {
+    transform: scale(1.005); /* Increase the scale on hover */
+}
+
+
+@media print {
+    /* Reset margins for the whole page */
+    @page {
+      margin: 0;
+    }
+  
+    /* Hide non-printable elements */
+    .printable {
+      display: none;
+    }
+  
+    /* Adjust margins for the .p-card element to make it full-screen */
+    ::ng-deep .p-card {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white; /* Set background color to white */
+      border: none; /* Remove border */
+      box-shadow: none; /* Remove box shadow */
+    }
+  
+    /* Style the content inside the .p-card as needed */
+    ::ng-deep .p-card-content {
+      padding: 0; /* Remove padding */
+    }
+  }
+  

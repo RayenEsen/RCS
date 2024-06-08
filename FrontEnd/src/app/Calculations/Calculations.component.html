@@ -1,0 +1,230 @@
+<p-toast></p-toast>
+
+    <div >
+    
+        <p-card>
+
+
+        <div *ngIf="!VisibleEchange">
+            <div style="margin-bottom: 7px;" class="printable">
+                <p-menubar [model]="items"></p-menubar>
+            </div>
+            
+        <p-table 
+        [value]="list" dataKey="id" 
+        selectionMode="multiple" 
+        [reorderableColumns]="true" 
+        [(selection)]="SelectedValues" 
+        dataKey="id"
+        [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem"><p-tableHeaderCheckbox pReorderableColumn /></th>
+                    <th style="width:10%">
+                        Client <p-columnFilter type="text" field="client" display="menu" />
+                    </th>
+                    <th style="width:10%">
+                        Rub <p-columnFilter type="text" field="rub" display="menu" />
+                    </th>
+                    <th style="width:10%">  
+                        Ref <p-columnFilter type="text" field="ref" display="menu" />
+                    </th>
+                    <th style="width:10%">
+                        Type <p-columnFilter type="text" field="type" display="menu" />
+                    </th>
+                    <th style="width:10%" pSortableColumn="achat">
+                        Achat <p-sortIcon field="achat" />
+                    </th>
+                    <th style="width:10%" pSortableColumn="vente">
+                        Vente <p-sortIcon field="vente" />
+                    </th>
+                    <th style="width:10%" pSortableColumn="benefice">
+                        Benefice <p-sortIcon field="benefice" />
+                    </th> 
+                    <th style="width:10%">
+                        Cours <i class="pi pi-chart-line clickable" style="color: rgb(0, 0, 0)" (click)="ShowEchange()"></i>
+                    </th>
+                    <th style="width:10%">
+                        Benefice HTV
+                    </th>
+                    <th style="width:10%">
+                        Benefice Net
+                    </th> 
+
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-values let-editing="editing" let-index="rowIndex">
+                <tr [pReorderableRow]="index">
+                    <td >
+                        <p-tableCheckbox [value]="values"  pReorderableRowHandle/>
+                    </td>
+                    <td [pEditableColumn]="values.client" pEditableColumnField="client">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="text" pInputText [(ngModel)]="values.client" />
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{values.client }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="values.rub" pEditableColumnField="rub">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="text" pInputText  [(ngModel)]="values.rub"/>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{values.rub }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+                    <td [pEditableColumn]="values.ref" pEditableColumnField="ref">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="text" pInputText [(ngModel)]="values.ref"/>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{values.ref }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+
+                    <td [pEditableColumn]="values.type" pEditableColumnField="type">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="text" pInputText [(ngModel)]="values.type"/>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{values.type }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+
+                    
+                    <td [pEditableColumn]="values.achat" pEditableColumnField="achat">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="number" pInputText  [(ngModel)]="values.achat"/>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{values.achat }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+
+                    <td [pEditableColumn]="values.vente" pEditableColumnField="vente">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="number" pInputText  [(ngModel)]="values.vente"/>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{values.vente }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+                    
+                    <td>
+                        {{this.CalculateBenifice(values).toFixed(3) }} DT
+                    </td>
+
+
+                    <td [pEditableColumn]="values.cours" pEditableColumnField="cours">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="text" pInputText [(ngModel)]="values.cours"/>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{values.cours }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+
+                    
+                    <td>
+                        {{this.CalculateHTV(values).toFixed(3) }} DT
+                    </td>
+
+
+                    <td>
+                        {{this.CalculateNET(values).toFixed(3) }} DT
+                    </td>
+
+                <tr>
+                
+
+
+                
+
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td colspan="9" class="text-right">Totale</td>
+                    <td>{{this.CalculateTotalHTV().toFixed(3) }} DT</td> 
+                    <td>{{this.CalculateTotalNET().toFixed(3) }} DT</td>
+                </tr>
+            </ng-template>
+    </p-table>
+        </div>
+  
+
+
+        <div *ngIf="VisibleEchange">
+            <div style="margin-bottom: 7px;" class="printable">
+                <p-menubar [model]="items2"></p-menubar>
+            </div>
+            <p-table 
+            [value]="EchangeData" 
+            [rows]="20"
+            [rowsPerPageOptions]="[20, 40, 60,180]"
+   
+            [paginator]="true"
+
+
+            [tableStyle]="{ 'min-width': '50rem' }" >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Numero</th>
+                        <th>Devise <p-columnFilter type="text" field="currency" display="menu" /></th>
+                        <th>Taux de change</th>
+                        <th>Dernière mise à jour</th>
+                        <th>Prochaine mise à jour</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data let-index="rowIndex">
+                    <tr>
+                        <td>{{ index }}</td>
+                        <td>{{ data.currency }}</td>
+                        <td>{{ data.rate }}</td>
+                        <td>{{ LastUpdate | date:'EEE, dd MMM yyyy' }}</td>
+                        <td>{{ NextUpdate | date:'EEE, dd MMM yyyy' }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        
+
+    
+
+
+    </p-card>
+    
+    
+    </div>
+       
+    
+

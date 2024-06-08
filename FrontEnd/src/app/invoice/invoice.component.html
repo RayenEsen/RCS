@@ -1,0 +1,118 @@
+<p-toast></p-toast>
+
+<p-card >
+  <div style="display: flex; ">
+    <div>
+      <img src="https://i.ibb.co/30Gkkzm/River-Cruise-3.png" alt="River-Cruise-3" style="width: auto; height: auto; margin: 10px;">
+      
+    </div>
+
+    <div style="flex-direction: column; ">
+      <h4>Societe Roua Consulting et Services</h4>
+      <h4>2 Rue Houcine Bouzayen Bardo-2000 Tunis</h4>
+      <h4>Mf : 1853109 N/A/M/000</h4>
+      <h4>Portable: 50421211</h4>
+      <h4>m.triki&#64;ipsenlogistics.com.tn</h4>
+    </div>
+
+  </div>
+  
+  <h1 style="color: rgb(6, 15, 85);" style="text-align: center;">
+    Facture
+  </h1>
+
+  <hr>
+
+  <div style="display: flex; justify-content: space-between;">
+
+    <div>
+      Ipsenlogistics Sarl<br>
+      Office: Zone Portiere Rades - Route du Bac - 2040 Rades - Tunisia<br>
+      <small>MF - 939998 XAM 000</small>
+    </div>
+  
+    <div>
+      <h4>Facture N'{{facture.id}}</h4>
+      <h3>Date {{ facture.date | date:'dd/MM/yyyy' }}</h3>
+    </div>
+
+  </div>
+  <p-table [value]="facture.factureData" [tableStyle]="{ 'min-width': '50rem' }" selectionMode="single">
+    <ng-template pTemplate="header">
+        <tr>
+          <th>Description</th>
+          <th>Qte</th>
+          <th>Prix</th>
+          <th>Montant</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-facture let-editing="editing" let-rowIndex="rowIndex" >
+        
+      <tr>
+
+
+
+            <td [pEditableColumn]="facture.description" pEditableColumnField="cours"  *ngIf="rowIndex==1" >
+              <p-cellEditor>
+                  <ng-template pTemplate="input">
+                      <input type="text" pInputText [(ngModel)]="facture.description" (ngModelChange)="CalculateTVA()" />
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    <td>{{ facture.description}}</td>
+                  </ng-template>
+              </p-cellEditor>
+            </td>
+
+
+  
+            <td  *ngIf="rowIndex!=1">{{ facture.description}}</td>
+
+
+
+
+            <td>1</td>
+
+            <td> </td>
+
+
+            <!-- The TVA IS Auto Calculated so the User can't edit it -->
+
+
+            <td [pEditableColumn]="facture.montant" pEditableColumnField="cours" *ngIf="rowIndex==0">
+              <p-cellEditor>
+                  <ng-template pTemplate="input">
+                      <input type="number" pInputText [(ngModel)]="facture.montant" (ngModelChange)="CalculateTVA()"  />
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                      <td>{{ facture.montant  }} DT</td>
+                  </ng-template>
+              </p-cellEditor>
+          </td>
+
+
+
+          <td  *ngIf="rowIndex!=0">{{ facture.montant  }} DT</td>
+
+
+          
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+          <td colspan="3" class="text-right">Montant Totale</td>
+          <td>{{CalculateMontantTotal() }} DT</td>
+      </tr>
+  </ng-template>
+</p-table>
+
+<p>Arrête la présente facture à la somme de {{ numberToWords(CalculateMontantTotal()) }} dianars</p>
+
+<div style="display: flex; justify-content: flex-end;" >
+  <div style="margin-right: 5px;">
+    <p-button label="Print" [raised]="true" severity="secondary" [rounded]="true" (click)="Print()" class="printable"></p-button>
+  </div>
+    <p-button label="Save" [raised]="true" severity="secondary" [rounded]="true" (click)="Save()" class="printable"></p-button>
+</div>
+
+
+</p-card>
