@@ -3,32 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\controllers\\facturescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\controllers\\facturescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\controllers\\generalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\controllers\\generalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\models\\commercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\models\\commercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\models\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\models\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\models\\tablevalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\models\\tablevalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\models\\general.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\models\\general.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\models\\facturedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\models\\facturedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,92 +14,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CommerceContext.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\CommerceContext.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Models\\CommerceContext.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\CommerceContext.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Models\\CommerceContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T11:59:24.052Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FactureData.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\FactureData.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Models\\FactureData.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\FactureData.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Models\\FactureData.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T11:57:17.208Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Facture.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\Facture.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Models\\Facture.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\Facture.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Models\\Facture.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T11:57:16.223Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "General.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\General.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Models\\General.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\General.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Models\\General.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T11:56:52.511Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FacturesController.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Controllers\\FacturesController.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Controllers\\FacturesController.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Controllers\\FacturesController.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Controllers\\FacturesController.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAwwCwAAAA8AAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "CommerceWebAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Program.cs",
+              "RelativeToolTip": "CommerceWebAPI\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T11:35:56.195Z",
+              "WhenOpened": "2024-06-08T18:42:44.818Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TableValues.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\TableValues.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Models\\TableValues.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\TableValues.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Models\\TableValues.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T11:59:22.778Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GeneralsController.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Controllers\\GeneralsController.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Controllers\\GeneralsController.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Controllers\\GeneralsController.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Controllers\\GeneralsController.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAwwCsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T11:56:26.913Z"
             }
           ]
         }

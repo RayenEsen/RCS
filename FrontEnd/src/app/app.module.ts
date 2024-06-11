@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculationsComponent } from './Calculations/Calculations.component';
@@ -46,8 +48,10 @@ import { MessageService } from 'primeng/api';
     BrowserAnimationsModule,
     ContextMenuModule,
     ToastModule,
+    AutoCompleteModule,
+    ConfirmDialogModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService , ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

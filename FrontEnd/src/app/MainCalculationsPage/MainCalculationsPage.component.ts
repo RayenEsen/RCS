@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { GeneralService } from '../Shared/General.service';
 import { TableValues } from '../Shared/TableValues';
 import { Facture } from '../Shared/Facture';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-MainCalculationsPage',
@@ -21,10 +22,10 @@ export class MainCalculationsPageComponent implements OnInit {
   items2: any[] = [
     { label: 'Fishe de calcul', icon: 'pi pi-calculator', command: () => this.NavigateCalcul() },
     { label: 'Voir Facture', icon: 'pi pi-eye', command: () => this.NavigateInvoice() },
-    { label: 'Supprimer', icon: 'pi pi-trash', command: () => this.Remove() },
+    { label: 'Supprimer', icon: 'pi pi-trash', command: () => this.confirm()},
   ];
 
-  constructor(private router: Router , public serviceG : GeneralService  ) {}
+  constructor(private router: Router , public serviceG : GeneralService  , private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
     this.serviceG.GetGeneral().subscribe({
@@ -40,7 +41,18 @@ export class MainCalculationsPageComponent implements OnInit {
       }
     })
   }
-  
+  confirm() {
+    this.confirmationService.confirm({
+        message: 'Êtes-vous sûr de vouloir effectuer cette action?',
+        header: 'Confirmation',
+        acceptLabel: 'Oui',
+        rejectLabel: 'Non',
+        accept: () => {
+            this.Remove();
+        }
+    });
+}
+
 
 
   NewRow() {

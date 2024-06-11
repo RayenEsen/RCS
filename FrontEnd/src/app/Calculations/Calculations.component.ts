@@ -18,9 +18,9 @@ export class CalculationsComponent implements OnInit {
   constructor(public serviceT : TableValuesService , private route: ActivatedRoute , public ServiceG : GeneralService , private messageService: MessageService, private exchangeRateService: ExchangeRateService) { }
 
 
- list: TableValues[] = [
+ list: TableValues[] = [];
 
- ];
+
 
   items: any[] = [
     {label: 'Ajouter', icon: 'pi pi-plus', command: () => this.NewRow()}, 
@@ -67,6 +67,7 @@ export class CalculationsComponent implements OnInit {
       next : (Response : any) =>
       {
         this.list.push(Response);
+        this.messageService.add({severity:'success', summary:'Ajouter', detail: " Nouveau client a ete ajouter"});
       }
     })
   }
@@ -144,6 +145,7 @@ Remove() {
     this.serviceT.RemoveTableValues(this.id,this.SelectedValues).subscribe({
       next : (response : any) =>
         {
+          this.messageService.add({severity:'success', summary:'Supprimer', detail:" Client a ete supprimer"});
         }
     })
 
@@ -156,43 +158,66 @@ Remove() {
 CalculateBenifice(values: TableValues)
 {
   if(values.vente && values.achat)
-    {
-      values.benefice =  (values.vente-values.achat)/2
-      return (values.vente-values.achat)/2
-    }
+  {  
+            values.benefice =  (values.vente-values.achat)/2
+            return (values.vente-values.achat)/2  
+  }
   else return 0 
 }
 
 CalculateHTV(values: TableValues): number {
-  if (values && typeof values.cours === 'string') {
+  if(values.cours!=="")
+    {
+      if (values && typeof values.cours === 'string') {
 
-      const coursNumbers = parseFloat(values.cours.replace(/[^\d.-]/g, ''));
-      
-      if (!isNaN(coursNumbers) && values.benefice !== undefined) { 
-          values.benefice_HTV = values.benefice * coursNumbers
-          return values.benefice * coursNumbers;
-      }
-  }
+        const coursNumbers = parseFloat(values.cours.replace(/[^\d.-]/g, ''));
+        
+        if (!isNaN(coursNumbers) && values.benefice !== undefined) { 
+            values.benefice_HTV = values.benefice * coursNumbers
+            return values.benefice * coursNumbers;
+        }
+    }
+    }
+    else
+    {
+      values.benefice_HTV = 0
+      return 0;
+    }
   return 0; 
 }
 
 
 
 CalculateNET(values: TableValues): number {
-  const HTV = this.CalculateHTV(values); // Calculate HTV
-  const VATRate = 0.19; // VAT rate (19%)
-
-  // Calculate NET by subtracting VAT
-  const VATAmount = HTV * VATRate;
-  const NET = HTV - VATAmount;
-
-  // Assign NET to the values object
-  values.benefice_net = NET;
-
-  return NET;
+  if(values.benefice)
+  {
+    if(values.cours!=="")
+      {
+        const HTV = this.CalculateHTV(values); // Calculate HTV
+        const VATRate = 0.19; // VAT rate (19%)
+      
+        // Calculate NET by subtracting VAT
+        const VATAmount = HTV * VATRate;
+        const NET = HTV - VATAmount;
+      
+        // Assign NET to the values object
+        values.benefice_net = NET;
+        return NET;
+      }
+      else 
+      {
+        values.benefice_net = values.benefice;
+        return values.benefice
+      }
+  }
+  return 0
 }
 
 
+CalculateRetourdefond(id : number)
+{
+  
+}
 
 CalculateTotalHTV() {
   let sum = 0;
