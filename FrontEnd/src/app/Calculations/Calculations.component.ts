@@ -57,6 +57,7 @@ export class CalculationsComponent implements OnInit {
       next : (Response : any) =>
       {
         this.list = Response;
+        console.log(this.list)
       }
     })
   }
@@ -75,16 +76,23 @@ export class CalculationsComponent implements OnInit {
 
 
   Export() {
+    // Transform the list to exclude the 'id' property
+    const exportData = this.list.map(item => {
+      const { id, ...exportItem } = item; // Destructure item and exclude 'id'
+      return exportItem;
+    });
+  
     // Define the worksheet
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.list);
-
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
+  
     // Define the workbook and add the worksheet to it
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
+  
     // Save the Excel file
     XLSX.writeFile(wb, 'exported_data.xlsx');
-}
+  }
+  
 
 ExportPDF() {
 
@@ -108,35 +116,45 @@ Import() {
           const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 
           // Convert the worksheet to an array of objects
-          const importedList: TableValues[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1).map((row: any) => {
-              const tableValues = new TableValues();
-              tableValues.client = row[1];
-              tableValues.rub = row[2];
-              tableValues.ref = row[3];
-              tableValues.type = row[4];
-              tableValues.achat = row[5];
-              tableValues.vente = row[6];
-              tableValues.benefice = row[7];
-              tableValues.cours = row[8];
-              tableValues.benefice_HTV = row[9];
-              tableValues.benefice_net = row[10];
-              tableValues.generalId = this.id;
-              return tableValues;
+          const importedList: TableValues[] = [];
+
+          XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1).forEach((row: any) => {
+              // Ensure required fields are populated correctly
+              if (row[0] !== undefined && row[0] !== null) {  // Assuming row[0] corresponds to client
+                  const tableValues = new TableValues();
+                  tableValues.client = row[0];
+                  tableValues.rub = row[1] !== undefined ? String(row[1]) : "";  // Convert to string or use empty string if undefined
+                  tableValues.ref = row[2] !== undefined ? String(row[2]) : "";
+                  tableValues.type = row[3] || "";
+                  tableValues.achat = row[4] !== undefined ? +row[4] : undefined;
+                  tableValues.vente = row[5] !== undefined ? +row[5] : undefined;
+                  tableValues.benefice = row[6] !== undefined ? +row[6] : undefined;
+                  tableValues.cours = row[7] || "";
+                  tableValues.benefice_HTV = row[8] !== undefined ? +row[8] : undefined;
+                  tableValues.benefice_net = row[9] !== undefined ? +row[9] : undefined;
+                  tableValues.generalId = this.id || 0;  // Ensure generalId is set correctly
+
+                  importedList.push(tableValues);
+              }
           });
+          
           // Add the importedList to your existing list
           this.serviceT.AddMultipleTableValues(importedList).subscribe({
-            next : (response : any)=>
-              {
-                 this.list.push(...response)
+              next: (response: any) => {
+                  this.list.push(...response);
+              },
+              error: (error: any) => {
+                  console.error('Error adding table values:', error);
+                  // Handle error response from server if needed
               }
-          })
+          });
       };
+
       reader.readAsArrayBuffer(file);
   };
 
   input.click();
 }
-
 
 
 SelectedValues : TableValues[] =  [];
@@ -187,6 +205,15 @@ CalculateHTV(values: TableValues): number {
 }
 
 
+
+Calculatemagasinage(values: TableValues) {
+  if (values && values.vente !== undefined && values.achat !== undefined) {
+      values.benefice = values.vente - values.achat
+      return values.vente - values.achat;
+  } else {
+      return 0;
+  }
+}
 
 CalculateNET(values: TableValues): number {
   if(values.benefice)

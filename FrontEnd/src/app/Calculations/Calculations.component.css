@@ -5,9 +5,6 @@
     transition: transform 0.3s; /* Add a transition for smooth animation */
 }
 
-::ng-deep .p-card:hover {
-    transform: scale(1.005); /* Increase the scale on hover */
-}
 
 @media print {
     /* Reset margins for the whole page */
@@ -19,7 +16,7 @@
     .printable {
       display: none;
     }
-  
+
     /* Adjust margins for the .p-card element to make it full-screen */
     ::ng-deep .p-card {
       margin: 0;

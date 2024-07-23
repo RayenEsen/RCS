@@ -4,6 +4,8 @@ import { Facture } from '../Shared/Facture';
 import { ActivatedRoute } from '@angular/router';
 import { FactureServiceService } from '../Shared/FactureService.service';
 import { MessageService } from 'primeng/api';
+import { GeneralService } from '../Shared/General.service';
+import { TableService } from 'primeng/table';
 
 @Component({
   selector: 'app-invoice',
@@ -16,40 +18,41 @@ export class InvoiceComponent implements OnInit {
 
    facture: Facture = new Facture();
    generalid: number = 0; 
+   total: number = 0;
 
 
 
-
-  constructor(private route: ActivatedRoute, public ServiceF : FactureServiceService , private messageService: MessageService) { }
+  constructor(private route: ActivatedRoute, public ServiceF : FactureServiceService , private messageService: MessageService )  { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
         this.generalid = +params.get('id')!; 
+        this.total = +params.get('montantotal')!; 
     });
     this.ServiceF.GetFacture(this.generalid).subscribe({
         next : (response : any) =>
         {
             this.facture = response;
-            console.log(this.facture)
+            this.facture.factureData[0].montant = this.total;
+            this.CalculateTVA()
         }
     })
   }
 
 
 
-numberToWords(num: number): string {
-    if (num === 0) {
-        return 'zéro';
-    }
+  numberToWords(num: number): string {
+    // Ensure the number is treated as a string with three decimal places
+    const fixedNum = num.toFixed(3);
 
     // Split the number into integer and fractional parts
-    const [integerPart, fractionalPart] = num.toString().split('.');
+    const [integerPart, fractionalPart] = fixedNum.split('.');
 
     const integerWords = this.convertIntegerPart(parseInt(integerPart, 10));
-    const fractionalWords = fractionalPart ? this.convertFractionalPart(fractionalPart) : '';
+    const fractionalWords = this.convertFractionalPart(fractionalPart);
+    
     // Combine the integer and fractional parts with the appropriate conjunction
-    const conjunction = fractionalWords ? 'et ' : '';
-    return `${integerWords} ${conjunction}${fractionalWords}`.trim();
+    return `${integerWords} dinars et ${fractionalWords} millimes`.trim();
 }
 
 convertIntegerPart(num: number): string {
@@ -76,7 +79,7 @@ convertIntegerPart(num: number): string {
 
         // Handle tens and units
         if (chunk >= 20) {
-            chunkWords += tens[Math.floor(chunk / 10)] + '-'; // Handle tens
+            chunkWords += tens[Math.floor(chunk / 10)] + (chunk % 10 !== 0 ? '-' : ''); // Handle tens
             chunk %= 10;
         } else if (chunk >= 10) {
             chunkWords += teens[chunk - 10] + ' '; // Handle teens

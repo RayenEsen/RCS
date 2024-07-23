@@ -71,7 +71,7 @@ export class MainCalculationsPageComponent implements OnInit {
   NavigateInvoice() {
     if (this.selectedMainCalculation) {
       const id = this.selectedMainCalculation.id;
-      this.router.navigate(['/Facture', id]);
+      this.router.navigate(['/Facture', id , this.selectedMainCalculation.montantTotal]);
     }
   }
 
@@ -79,6 +79,16 @@ export class MainCalculationsPageComponent implements OnInit {
   {
     if (this.selectedMainCalculation) {
       const id = this.selectedMainCalculation.id;
+      this.router.navigate(['/Calcul', id]);
+    }
+  }
+
+
+  
+  NavigateCalcul2(values: General)
+  {
+    if (values) {
+      const id = values.id;
       this.router.navigate(['/Calcul', id]);
     }
   }

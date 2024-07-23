@@ -26,13 +26,13 @@
   <div style="display: flex; justify-content: space-between;">
 
     <div>
-      Ipsenlogistics Sarl<br>
+      Ipsen logistics Sarl<br>
       Office: Zone Portiere Rades - Route du Bac - 2040 Rades - Tunisia<br>
       <small>MF - 939998 XAM 000</small>
     </div>
   
     <div>
-      <h4>Facture N'{{facture.id}}</h4>
+      <h4>Facture N'&nbsp;{{facture.id}}</h4>
       <h3>Date {{ facture.date | date:'dd/MM/yyyy' }}</h3>
     </div>
 
@@ -84,14 +84,14 @@
                       <input type="number" pInputText [(ngModel)]="facture.montant" (ngModelChange)="CalculateTVA()"  />
                   </ng-template>
                   <ng-template pTemplate="output">
-                      <td>{{ facture.montant  }} DT</td>
+                      <td>{{ facture.montant.toFixed(3)  }} DT</td>
                   </ng-template>
               </p-cellEditor>
           </td>
 
 
 
-          <td  *ngIf="rowIndex!=0">{{ facture.montant  }} DT</td>
+          <td  *ngIf="rowIndex!=0">{{ facture.montant.toFixed(3)  }} DT</td>
 
 
           
@@ -100,12 +100,12 @@
     <ng-template pTemplate="footer">
       <tr>
           <td colspan="3" class="text-right">Montant Totale</td>
-          <td>{{CalculateMontantTotal() }} DT</td>
+          <td>{{CalculateMontantTotal().toFixed(3) }} DT</td>
       </tr>
   </ng-template>
 </p-table>
 
-<p>Arrête la présente facture à la somme de {{ numberToWords(CalculateMontantTotal()) }} dianars</p>
+<p>Arrête la présente facture à la somme de {{ numberToWords(CalculateMontantTotal()) }} </p>
 
 <div style="display: flex; justify-content: flex-end;" >
   <div style="margin-right: 5px;">

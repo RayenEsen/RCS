@@ -6,7 +6,7 @@ import { MainCalculationsPageComponent } from './MainCalculationsPage/MainCalcul
 const routes: Routes = [
 
   { path: '', component: MainCalculationsPageComponent },
-  { path: 'Facture/:id', component: InvoiceComponent },
+  { path: 'Facture/:id/:montantotal', component: InvoiceComponent },
   { path: 'Calcul/:id', component: CalculationsComponent },
 
 ];
