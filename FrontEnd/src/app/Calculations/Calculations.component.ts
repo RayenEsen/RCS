@@ -177,8 +177,7 @@ CalculateBenifice(values: TableValues)
 {
   if(values.vente && values.achat)
   {  
-            values.benefice =  (values.vente-values.achat)/2
-            return (values.vente-values.achat)/2  
+            return (values.vente-values.achat)  
   }
   else return 0 
 }
