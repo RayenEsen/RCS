@@ -138,10 +138,24 @@
                     </td>
 
                     
-                    <td> 
-                        {{ this.CalculateBenifice(values).toFixed(3) }} DT
+                    <td *ngIf="values.client.toLowerCase() === 'magasinage'; else otherClients"> 
+                        {{ this.Calculatemagasinage(values).toFixed(3) }} DT
                     </td>
-
+                    <ng-template #otherClients>
+                        <td *ngIf="values.client.toLowerCase() === 'fret' || values.client.toLowerCase() === 'frais locaux'"> 
+                            {{ this.CalculateBenifice(values).toFixed(3) }} DT
+                        </td>
+                        <td [pEditableColumn]="values.benefice" pEditableColumnField="benefice" *ngIf="values.client.toLowerCase() !== 'fret' && values.client.toLowerCase() !== 'frais locaux'">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="number" pInputText [(ngModel)]="values.benefice"/>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ values.benefice }} DT
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                    </ng-template>
                     
 
 
