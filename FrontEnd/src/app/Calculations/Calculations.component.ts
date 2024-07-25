@@ -35,7 +35,8 @@ export class CalculationsComponent implements OnInit {
     },
     { label: 'Supprimer', icon: 'pi pi-file-excel' , command: () => this.Remove() },
     { label: 'Imprimer', icon: 'pi pi-print' , command: () => this.Print() } ,
-    { label: 'Sauvegarder', icon: 'pi pi-save' , command: () => this.saveValues() } 
+    { label: 'Sauvegarder', icon: 'pi pi-save' , command: () => this.saveValues() } ,
+
 
   ];
 
@@ -63,6 +64,8 @@ export class CalculationsComponent implements OnInit {
   }
 
 
+
+
   NewRow() {
     this.serviceT.AddTableValues(this.id).subscribe({
       next : (Response : any) =>
@@ -76,9 +79,9 @@ export class CalculationsComponent implements OnInit {
 
 
   Export() {
-    // Transform the list to exclude the 'id' property
+    // Transform the list to exclude the 'generalid', 'type', and 'ref' properties
     const exportData = this.list.map(item => {
-      const { id, ...exportItem } = item; // Destructure item and exclude 'id'
+      const { generalId, type, ref, ...exportItem } = item; // Destructure item and exclude 'generalid', 'type', 'ref'
       return exportItem;
     });
   
@@ -92,6 +95,7 @@ export class CalculationsComponent implements OnInit {
     // Save the Excel file
     XLSX.writeFile(wb, 'exported_data.xlsx');
   }
+  
   
 
 ExportPDF() {
