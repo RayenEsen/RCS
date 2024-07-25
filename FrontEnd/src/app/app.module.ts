@@ -25,12 +25,12 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { MessageService } from 'primeng/api';
 
 @NgModule({
-  declarations: [						
+  declarations: [							
     AppComponent,
       CalculationsComponent,
       NavbarComponent,
       InvoiceComponent,
-      MainCalculationsPageComponent
+      MainCalculationsPageComponent,
    ],
   imports: [
     BrowserModule,

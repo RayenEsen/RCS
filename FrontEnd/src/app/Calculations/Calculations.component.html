@@ -235,10 +235,13 @@
             </p-table>
         </div>
 
+
         <div style="display: flex;">
-            <h3 style="padding-left: 14px; padding-right: 15px;">Benefice Net Total</h3>
-            <h4>{{this.CalculateTotalNET().toFixed(3) }} DT</h4>
+            <h3 style="padding-left: 14px; padding-right: 15px;">TVA Total</h3>
+            <h4>{{ (this.CalculateTotalNET()-this.CalculateTotalHTV()).toFixed(3) }} DT</h4>
         </div>
+
+        
 
     </p-card>
     

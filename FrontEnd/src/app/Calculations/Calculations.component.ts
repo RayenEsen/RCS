@@ -81,7 +81,7 @@ export class CalculationsComponent implements OnInit {
   Export() {
     // Transform the list to exclude the 'generalid', 'type', and 'ref' properties
     const exportData = this.list.map(item => {
-      const { generalId, type, ref, ...exportItem } = item; // Destructure item and exclude 'generalid', 'type', 'ref'
+      const { generalId, type, ref,id, ...exportItem } = item; // Destructure item and exclude 'generalid', 'type', 'ref'
       return exportItem;
     });
   
