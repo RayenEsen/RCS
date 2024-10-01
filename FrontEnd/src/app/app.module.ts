@@ -25,14 +25,16 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { MessageService } from 'primeng/api';
 import { ChartModule } from 'primeng/chart';
 import { RippleModule } from 'primeng/ripple';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [							
+  declarations: [								
     AppComponent,
       CalculationsComponent,
       NavbarComponent,
       InvoiceComponent,
       MainCalculationsPageComponent,
+      FooterComponent
    ],
   imports: [
     BrowserModule,
