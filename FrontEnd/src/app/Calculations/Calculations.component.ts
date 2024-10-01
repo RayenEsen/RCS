@@ -269,12 +269,16 @@ CalculateTotalNET() {
 
 
   for (const item of this.list) {
-
+      const oldsum = sum
       sum += item.benefice_net || 0; 
+      console.log(oldsum ,"+" , item.benefice_net , "= " , sum)
   }
 
   return sum
 }
+
+
+
 
 
 

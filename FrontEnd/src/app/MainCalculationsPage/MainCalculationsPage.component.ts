@@ -25,6 +25,16 @@ export class MainCalculationsPageComponent implements OnInit {
     { label: 'Supprimer', icon: 'pi pi-trash', command: () => this.confirm()},
   ];
 
+  data : any;
+
+  options: any = {
+    plugins: {
+      legend: {
+        display : false
+      }
+  },
+  };
+
   constructor(private router: Router , public serviceG : GeneralService  , private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
@@ -37,10 +47,55 @@ export class MainCalculationsPageComponent implements OnInit {
         else
         {
           this.list = Response;
+
+          const currentYear = new Date().getFullYear();
+          let FilteredList = this.list.filter((item: any) => new Date(item.dateDebut).getFullYear() === currentYear)
+          let montantTotalArray = FilteredList.map((item: any) => item.montantTotal); // Then map to get montantTotal
+          const monthToAdd = new Date(FilteredList[0].dateDebut).getMonth() + 1; // Ensure it's a Date object
+          montantTotalArray = this.AddTableFix(monthToAdd, montantTotalArray);
+
+
+          this.data = {
+            labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            datasets: [
+              {
+                type: 'line',
+                label: 'Montant Total',
+                fill: false,
+                yAxisID: 'y',
+                tension: 0.4,
+                data: montantTotalArray,
+                backgroundColor: "#8c8c8c", // Muted grey for the line
+                borderColor: "#1f1f1f", // Dark grey for line border
+                borderWidth: 2
+              },
+              {
+                type: 'bar',
+                label: 'Montant Total',
+                fill: false,
+                yAxisID: 'y',
+                tension: 0.4,
+                data: montantTotalArray,
+                backgroundColor: ['#333333', '#4a4a4a', '#616161', '#787878', '#8f8f8f', '#a6a6a6' ,'#7f7f7f', '#8f8f8f','#a0a0a0','#b1b1b1','#c2c2c2', '#d3d3d3'],
+                borderColor: '#1f1f1f',
+                borderWidth: 1
+              },
+            ]  
+        };
         }
       }
     })
+
   }
+
+  AddTableFix(x: number, Table: any[]) {
+    for (let i = 0; i < x; i++) { // Declare 'i' with 'let'
+        Table.unshift(0); // Push 0 at the beginning of the table
+    }
+    return Table; // Return the modified table
+}
+
+
   confirm() {
     this.confirmationService.confirm({
         message: 'Êtes-vous sûr de vouloir effectuer cette action?',
@@ -63,8 +118,24 @@ export class MainCalculationsPageComponent implements OnInit {
       }
     });
   }
+
+  Total()
+  {
+    let S = 0;
+    for(let i=0;i<this.list.length;i++)
+    {
+      S = S+this.list[i].montantTotal
+    }
+    return S
+  }
   
-  
+  calculatePercentageChange(current: number, previous: number): number {
+    if (previous === 0) {
+        return 100; // Prevent division by zero, return 100% in this case
+    }
+    const change = ((current - previous) / previous) * 100;
+    return parseFloat(change.toFixed(2)); // Round to two decimal places
+  }
 
   selectedMainCalculation? : General;
   

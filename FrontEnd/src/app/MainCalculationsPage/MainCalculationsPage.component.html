@@ -1,4 +1,10 @@
+
 <p-toast></p-toast>
+
+<p-card >
+    <p-chart type="line" [data]="data" [options]="options" height="150px" />
+</p-card>
+
 <p-card>
 
     <div style="margin-bottom: 7px;">
@@ -41,12 +47,48 @@
             <td>{{rowIndex + 1}}</td>
             <td>{{values.dateDebut | date:'dd/MM/yyyy'}}</td>
             <td>{{ values.dateFin | date:'dd/MM/yyyy' }}</td>
-            <td>{{values.montantTotal}}</td>
-        </tr>        
+            <td style="display: flex; align-items: center;">
+                {{values.montantTotal}}
+            
+                <!-- If it's the first row, show a neutral icon -->
+                <ng-container *ngIf="rowIndex === 0">
+                    <i class="pi pi-minus" style="color: grey; margin-left: 8px;"></i> <!-- Neutral (Dash) Icon -->
+                </ng-container>
+            
+                <!-- Show upward arrow and percentage for increasing trend -->
+                <ng-container *ngIf="rowIndex > 0 && +list[rowIndex].montantTotal > +list[rowIndex-1].montantTotal">
+                    <i class="pi pi-arrow-up" style="color: green; margin-left: 8px;"></i> <!-- Upward Arrow (Green) -->
+                    <span style="color: green; margin-left: 4px;">
+                        (+{{ calculatePercentageChange(+list[rowIndex].montantTotal, +list[rowIndex-1].montantTotal) }}%)
+                    </span>
+                </ng-container>
+            
+                <!-- Show downward arrow and percentage for decreasing trend -->
+                <ng-container *ngIf="rowIndex > 0 && +list[rowIndex].montantTotal < +list[rowIndex-1].montantTotal">
+                    <i class="pi pi-arrow-down" style="color: red; margin-left: 8px;"></i> <!-- Downward Arrow (Red) -->
+                    <span style="color: red; margin-left: 4px;">
+                       ({{ calculatePercentageChange(+list[rowIndex].montantTotal, +list[rowIndex-1].montantTotal) }}%)
+                    </span>
+                </ng-container>
+
+            </td>
+            
+        </tr>   
+             
     </ng-template>
     
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            <div style="display: flex;align-items: center;">
+                <p style="margin-right: 8px;">
+                    Total 
+                </p>
+                <p>
+                    {{Total()}}
+                </p>
+            </div>
+        </div>
+    </ng-template>
 </p-table>
 </p-card>
-
-
 <p-confirmDialog />

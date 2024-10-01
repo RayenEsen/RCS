@@ -23,6 +23,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { MainCalculationsPageComponent } from './MainCalculationsPage/MainCalculationsPage.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { MessageService } from 'primeng/api';
+import { ChartModule } from 'primeng/chart';
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
   declarations: [							
@@ -50,6 +52,8 @@ import { MessageService } from 'primeng/api';
     ToastModule,
     AutoCompleteModule,
     ConfirmDialogModule,
+    ChartModule,
+    RippleModule,
   ],
   providers: [MessageService , ConfirmationService],
   bootstrap: [AppComponent]
