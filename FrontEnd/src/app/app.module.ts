@@ -26,6 +26,8 @@ import { MessageService } from 'primeng/api';
 import { ChartModule } from 'primeng/chart';
 import { RippleModule } from 'primeng/ripple';
 import { FooterComponent } from './footer/footer.component';
+import { DialogModule } from 'primeng/dialog';
+import { StepperModule } from 'primeng/stepper';
 
 @NgModule({
   declarations: [								
@@ -56,7 +58,9 @@ import { FooterComponent } from './footer/footer.component';
     ConfirmDialogModule,
     ChartModule,
     RippleModule,
-  ],
+    DialogModule,
+    StepperModule,
+    ],
   providers: [MessageService , ConfirmationService],
   bootstrap: [AppComponent]
 })

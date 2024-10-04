@@ -23,7 +23,7 @@ export class CalculationsComponent implements OnInit {
 
 
   items: any[] = [
-    {label: 'Ajouter', icon: 'pi pi-plus', command: () => this.NewRow()}, 
+    {label: 'Ajouter', icon: 'pi pi-plus', command: () => this.AjoutTransaction_V2()}, 
     { label: 'Importer', icon: 'pi pi-file-import', command: () => this.Import() }, 
     {
       label: 'Exporter',
@@ -36,8 +36,6 @@ export class CalculationsComponent implements OnInit {
     { label: 'Supprimer', icon: 'pi pi-file-excel' , command: () => this.Remove() },
     { label: 'Imprimer', icon: 'pi pi-print' , command: () => this.Print() } ,
     { label: 'Sauvegarder', icon: 'pi pi-save' , command: () => this.saveValues() } ,
-
-
   ];
 
 
@@ -53,15 +51,20 @@ export class CalculationsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; 
-  });
+    });
+    
     this.serviceT.GetAllTableValues(this.id).subscribe({
-      next : (Response : any) =>
-      {
+      next: (Response: any) => {
         this.list = Response;
-        console.log(this.list)
+        
+        // Check if the list has only 1 element and that element's client is "Nouveau Client"
+        if (this.list.length === 1 && this.list[0].client === "Nouveau Client") {
+          this.list = []; // Clear the list since we don't need to show it
+        }
       }
-    })
+    });
   }
+  
 
 
 
@@ -320,6 +323,94 @@ getExchangeRate() {
       console.error('Error fetching exchange rates:', error);
     }
   );
+}
+
+
+AjoutVisible = false;
+NouveauClient : TableValues = new TableValues;
+NouveauFret : TableValues = new TableValues;
+NouveauRDF : TableValues = new TableValues;
+NouveauFL : TableValues = new TableValues;
+NouveauChargement : TableValues = new TableValues;
+NouveauAssurance : TableValues = new TableValues;
+NouveauMagasinage : TableValues = new TableValues;
+NouveauTransport : TableValues = new TableValues;
+NouveauSurestarie : TableValues = new TableValues;
+AjoutTransaction_V2()
+{
+  this.AjoutVisible = true;
+  this.NouveauFret.client = "Fret"
+  this.NouveauRDF.client = "Retour de fond"
+  this.NouveauFL.client = "Frais locaux"
+  this.NouveauChargement.client = "Chargement"
+  this.NouveauAssurance.client = "Assurance"
+  this.NouveauMagasinage.client = "Magasinage"
+  this.NouveauTransport.client = "Transport"
+  this.NouveauSurestarie.client = "Surestarie"
+}
+
+Client = true;
+Fret = false;
+RDF = false;
+FL = false;
+Chargement = false;
+Assurance = false;
+Magasinage = false;
+Transport = false;
+surestarie = false;
+
+ShowDialog(name: string) {
+  // Set all values to false first, but handle the default `Client = true` case
+  this.Fret = false;
+  this.RDF = false;
+  this.FL = false;
+  this.Chargement = false;
+  this.Assurance = false;
+  this.Magasinage = false;
+  this.Transport = false;
+  this.surestarie = false;
+
+  // Set the selected value to true based on the name
+  switch (name) {
+    case 'Client':
+      this.Client = true;  // Keep Client true if selected
+      break;
+    case 'Fret':
+      this.Client = false; // Set Client false when Fret is selected
+      this.Fret = true;
+      break;
+    case 'RDF':
+      this.Client = false;
+      this.RDF = true;
+      break;
+    case 'FL':
+      this.Client = false;
+      this.FL = true;
+      break;
+    case 'Chargement':
+      this.Client = false;
+      this.Chargement = true;
+      break;
+    case 'Assurance':
+      this.Client = false;
+      this.Assurance = true;
+      break;
+    case 'Magasinage':
+      this.Client = false;
+      this.Magasinage = true;
+      break;
+    case 'Transport':
+      this.Client = false;
+      this.Transport = true;
+      break;
+    case 'Surestarie':
+      this.Client = false;
+      this.surestarie = true;
+      break;
+    default:
+      console.log('Invalid name');
+      break;
+  }
 }
 
 
