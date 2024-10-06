@@ -476,3 +476,11 @@ a.text-white:focus {
   background-color: transparent; /* Remove hover background color */
   cursor: default; /* Remove pointer or other hover-specific cursor styles */
 }
+
+
+
+
+::ng-deep p-dropdown.dropdown-custom .p-dropdown{
+  width: 750px;
+  color: #6b7280;
+}

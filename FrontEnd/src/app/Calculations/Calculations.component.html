@@ -139,24 +139,41 @@
 
                     
                     <td *ngIf="values.client.toLowerCase() === 'magasinage'; else otherClients"> 
-                        {{ this.Calculatemagasinage(values).toFixed(3) }} DT
-                    </td>
-                    <ng-template #otherClients>
-                        <td *ngIf="values.client.toLowerCase() === 'fret' || values.client.toLowerCase() === 'frais locaux'"> 
-                            {{ this.CalculateBenifice(values).toFixed(3) }} DT
-                        </td>
-                        <td [pEditableColumn]="values.benefice" pEditableColumnField="benefice" *ngIf="values.client.toLowerCase() !== 'fret' && values.client.toLowerCase() !== 'frais locaux'">
-                            <p-cellEditor>
-                                <ng-template pTemplate="input">
-                                    <input type="number" pInputText [(ngModel)]="values.benefice"/>
-                                </ng-template>
-                                <ng-template pTemplate="output">
-                                    {{ values.benefice }} DT
-                                </ng-template>
-                            </p-cellEditor>
-                        </td>
-                    </ng-template>
-                    
+                      {{ this.Calculatemagasinage(values).toFixed(3) }} DT
+                  </td>
+                  <ng-template #otherClients>
+                      <td *ngIf="values.client.toLowerCase() === 'fret' || values.client.toLowerCase() === 'frais locaux'"> 
+                          {{ this.CalculateBenifice(values).toFixed(3) }} DT
+                      </td>
+                      <td *ngIf="values.client.toLowerCase() === 'retour de fond'">
+                          {{ this.CalculateRetourdefond(values).toFixed(3) }} DT
+                      </td>
+                      <td *ngIf="values.client.toLowerCase() === 'chargement' || values.client.toLowerCase() === 'assurance'">
+                          {{ this.CalculateChargement_Assurance(values).toFixed(3) }} DT
+                      </td>
+                      <td 
+                      [pEditableColumn]="values.benefice" 
+                      pEditableColumnField="benefice" 
+                      *ngIf="values.client.toLowerCase() !== 'fret' 
+                          && values.client.toLowerCase() !== 'frais locaux' 
+                          && values.client.toLowerCase() !== 'retour de fond' 
+                          && values.client.toLowerCase() !== 'chargement' 
+                          && values.client.toLowerCase() !== 'assurance' 
+                          && values.client.toLowerCase() !== 'magasinage' 
+                          && values.client.toLowerCase() !== 'surestarie'">
+                      <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input type="number" pInputText [(ngModel)]="values.benefice"/>
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{ values.benefice }} DT
+                          </ng-template>
+                      </p-cellEditor>
+                  </td>
+                  
+                  </ng-template>
+                  
+                  
 
                     <td [pEditableColumn]="values.cours" pEditableColumnField="cours">
                         <p-cellEditor>
@@ -181,11 +198,7 @@
                     </td>
 
                 <tr>
-                
-
-
-                
-
+              
             </ng-template>
             <ng-template pTemplate="footer" >
                 <tr class="printable">
@@ -248,7 +261,7 @@
 
         <div style="display: flex;">
             <h3 style="padding-left: 14px; padding-right: 15px;">TVA Total</h3>
-            <h4>{{ (this.CalculateTotalNET()-this.CalculateTotalHTV()).toFixed(3) }} DT</h4>
+            <h4>Soon DT</h4>
         </div>
 
         
@@ -308,14 +321,12 @@
               
                     <div class="formbold-mb-3" style="margin-top: 15px;">
                       <label for="age" class="formbold-form-label"> Type Client *</label>
-                      <input
-                        type="text"
-                        name="Type Client"
-                        id="age"
-                        placeholder="Type Client"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauClient.type"
-                      />
+
+                      <p-dropdown 
+                      [ngClass]="'dropdown-custom'"
+                      [options]="Types" 
+                      [(ngModel)]="NouveauClient.type" 
+                      placeholder="Choisir une type" />
                     </div>
               
                     <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
@@ -323,7 +334,7 @@
               
                       <div>
                         <input
-                          type="text"
+                          type="number"
                           name="Achat Client"
                           id="firstname"
                           placeholder="Achat Client "
@@ -332,7 +343,7 @@
                         />
               
                         <input
-                          type="text"
+                          type="number"
                           name="lastname"
                           id="lastname"
                           placeholder="Vente Client"
@@ -341,47 +352,6 @@
                         />
                       </div>
                     </div>
-              
-    
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Cours Client </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Cours Client"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauClient.cours"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 10px;">
-                      <label for="age" class="formbold-form-label"> Benefice HTV </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice HTV"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauClient.benefice_HTV"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Benefice Net </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice Net"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauClient.benefice_net"
-                      />
-                    </div>
-              
-    
-            
             
               
                     <div style="margin-top: 30px;display: flex;justify-content: end;">
@@ -414,7 +384,7 @@
                           type="text"
                           name="Rub Fret"
                           id="firstname"
-                          placeholder="Rub Client"
+                          placeholder="Rub Fret"
                           class="formbold-form-input"
                           [(ngModel)]="NouveauFret.rub" 
                           />
@@ -423,31 +393,21 @@
                           type="text"
                           name="Ref Fret"
                           id="lastname"
-                          placeholder="Ref Client"
+                          placeholder="Ref Fret"
                           class="formbold-form-input" 
                           [(ngModel)]="NouveauFret.ref"
                           />
                       </div>
                     </div>
               
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Type Fret *</label>
-                      <input
-                        type="text"
-                        name="Type Fret"
-                        id="age"
-                        placeholder="Type Fret"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauFret.type"
-                      />
-                    </div>
+
               
                     <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
                       <label for="firstname" class="formbold-form-label"> Achat / Vente Fret </label>
               
                       <div>
                         <input
-                          type="text"
+                          type="number"
                           name="Achat Fret"
                           id="firstname"
                           placeholder="Achat Fret "
@@ -456,7 +416,7 @@
                         />
               
                         <input
-                          type="text"
+                          type="number"
                           name="lastname"
                           id="lastname"
                           placeholder="Vente Fret"
@@ -480,36 +440,14 @@
                       />
                     </div>
               
-                    <div class="formbold-mb-3" style="margin-top: 10px;">
-                      <label for="age" class="formbold-form-label"> Benefice HTV  </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice HTV de Fret"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauFret.benefice_HTV"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Benefice Net </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice Net de Fret"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauFret.benefice_net"
-                      />
-                    </div>
+
               
     
             
             
                     <div style="margin-top: 30px;display: flex;justify-content: space-between;">
                             <p-button label="Client"  icon="pi pi-arrow-left" (click)="ShowDialog('Client')" />            
-                            <p-button label="Retour de fond"  icon="pi pi-arrow-right" (click)="ShowDialog('RDF')" />            
+                            <p-button  label="Retour de fond"  icon="pi pi-arrow-right" (click)="ShowDialog('RDF')" />            
                     </div>
   
               
@@ -555,22 +493,12 @@
                       </div>
                     </div>
               
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Type de RDF *</label>
-                      <input
-                        type="text"
-                        name="Type RDF"
-                        id="age"
-                        placeholder="Type RDF"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauRDF.type"
-                      />
-                    </div>
+
               
                     <div class="formbold-mb-3" style="margin-top: 15px;">
                         <label for="age" class="formbold-form-label"> Vente de RDF *</label>
                         <input
-                          type="text"
+                          type="number"
                           name="Vente RDF"
                           id="age"
                           placeholder="Vente RDF"
@@ -580,42 +508,8 @@
                       </div>
               
     
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Cours RDF </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Cours RDF"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauRDF.cours"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 10px;">
-                      <label for="age" class="formbold-form-label"> Benefice HTV </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice HTV de RDF"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauRDF.benefice_HTV"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Benefice Net </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice Net de RDF"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauRDF.benefice_net"
-                      />
-                    </div>
+
+
               
     
             
@@ -669,17 +563,7 @@
                       </div>
                     </div>
               
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Type de FL *</label>
-                      <input
-                        type="text"
-                        name="Type FL"
-                        id="age"
-                        placeholder="Type FL"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauFL.type"
-                      />
-                    </div>
+
               
                     <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
                       <label for="firstname" class="formbold-form-label"> Achat / Vente FL </label>
@@ -705,45 +589,7 @@
                       </div>
                     </div>
               
-    
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Cours FL </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Cours FL"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauFL.cours"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 10px;">
-                      <label for="age" class="formbold-form-label"> Benefice HTV </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice HTV de FL"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauFL.benefice_HTV"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Benefice Net </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice Net de FL"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauFL.benefice_net"
-                      />
-                    </div>
-              
-    
+
             
             
               
@@ -794,17 +640,7 @@
                       </div>
                     </div>
               
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Type de Chargement *</label>
-                      <input
-                        type="text"
-                        name="Type Chargement"
-                        id="age"
-                        placeholder="Type Chargement"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauChargement.type"
-                      />
-                    </div>
+
               
                     <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
                       <label for="firstname" class="formbold-form-label"> Achat / Vente Chargement </label>
@@ -832,44 +668,7 @@
               
     
               
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Cours Chargement </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Cours Chargement"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauChargement.cours"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 10px;">
-                      <label for="age" class="formbold-form-label"> Benefice HTV </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice HTV de Chargement"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauChargement.benefice"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Benefice Net </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice Net de Chargement"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauChargement.benefice_net"
-                      />
-                    </div>
-              
-    
-            
+
             
               
                     <div style="margin-top: 30px;display: flex;justify-content: space-between;">
@@ -918,18 +717,7 @@
                         />
                       </div>
                     </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Type de Assurance *</label>
-                      <input
-                        type="text"
-                        name="Type Assurance"
-                        id="age"
-                        placeholder="Type Assurance"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauAssurance.type"
-                      />
-                    </div>
+
               
                     <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
                       <label for="firstname" class="formbold-form-label"> Achat / Vente Assurance </label>
@@ -956,46 +744,7 @@
                     </div>
               
     
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Cours Assurance </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Cours Assurance"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauAssurance.cours"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 10px;">
-                      <label for="age" class="formbold-form-label"> Benefice HTV </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice HTV de Assurance"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauAssurance.benefice_HTV"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Benefice Net </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice Net de Assurance"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauAssurance.benefice_net"
-                      />
-                    </div>
-              
-    
-            
-            
+
               
                     <div style="margin-top: 30px;display: flex;justify-content: space-between;">
                         <p-button label="Chargement"  icon="pi pi-arrow-left"  (click)="ShowDialog('Chargement')"/>            
@@ -1045,17 +794,7 @@
                       </div>
                     </div>
               
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Type de Magasinage *</label>
-                      <input
-                        type="text"
-                        name="Type Magasinage"
-                        id="age"
-                        placeholder="Type Magasinage"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauMagasinage.type"
-                      />
-                    </div>
+
               
                     <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
                       <label for="firstname" class="formbold-form-label"> Achat / Vente Magasinage </label>
@@ -1081,43 +820,7 @@
                       </div>
                     </div>
               
-    
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Cours Magasinage </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Cours Magasinage"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauMagasinage.cours"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 10px;">
-                      <label for="age" class="formbold-form-label"> Benefice HTV </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice HTV de Magasinage"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauMagasinage.benefice_HTV"
-                      />
-                    </div>
-              
-                    <div class="formbold-mb-3" style="margin-top: 15px;">
-                      <label for="age" class="formbold-form-label"> Benefice Net </label>
-                      <input
-                        type="text"
-                        name="age"
-                        id="age"
-                        placeholder="Benefice Net de Magasinage"
-                        class="formbold-form-input"
-                        [(ngModel)]="NouveauMagasinage.benefice_net"
-                      />
-                    </div>
+
                  
                     <div style="margin-top: 30px;display: flex;justify-content: space-between;">
                         <p-button label="Assurance"  icon="pi pi-arrow-left"  (click)="ShowDialog('Assurance')"/>  
@@ -1166,17 +869,7 @@
                     </div>
                   </div>
             
-                  <div class="formbold-mb-3" style="margin-top: 15px;">
-                    <label for="age" class="formbold-form-label"> Type de Transport *</label>
-                    <input
-                      type="text"
-                      name="Type Transport"
-                      id="age"
-                      placeholder="Type Transport"
-                      class="formbold-form-input"
-                      [(ngModel)]="NouveauTransport.type"
-                    />
-                  </div>
+
             
                   <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
                     <label for="firstname" class="formbold-form-label"> Achat / Vente Transport </label>
@@ -1203,42 +896,8 @@
                   </div>
             
   
-            
-                  <div class="formbold-mb-3" style="margin-top: 15px;">
-                    <label for="age" class="formbold-form-label"> Cours Transport </label>
-                    <input
-                      type="text"
-                      name="age"
-                      id="age"
-                      placeholder="Cours Transport"
-                      class="formbold-form-input"
-                      [(ngModel)]="NouveauTransport.cours"
-                    />
-                  </div>
-            
-                  <div class="formbold-mb-3" style="margin-top: 10px;">
-                    <label for="age" class="formbold-form-label"> Benefice HTV </label>
-                    <input
-                      type="text"
-                      name="age"
-                      id="age"
-                      placeholder="Benefice HTV de Transport"
-                      class="formbold-form-input"
-                      [(ngModel)]="NouveauTransport.benefice_HTV"
-                    />
-                  </div>
-            
-                  <div class="formbold-mb-3" style="margin-top: 15px;">
-                    <label for="age" class="formbold-form-label"> Benefice Net </label>
-                    <input
-                      type="text"
-                      name="age"
-                      id="age"
-                      placeholder="Benefice Net de Transport"
-                      class="formbold-form-input"
-                      [(ngModel)]="NouveauTransport.benefice_net"
-                    />
-                  </div>
+
+
                
                   <div style="margin-top: 30px;display: flex;justify-content: space-between;">
                       <p-button label="Magasinage"  icon="pi pi-arrow-left"  (click)="ShowDialog('Magasinage')"/>   
@@ -1288,17 +947,8 @@
                   </div>
                 </div>
           
-                <div class="formbold-mb-3" style="margin-top: 15px;">
-                  <label for="age" class="formbold-form-label"> Type de Surestarie *</label>
-                  <input
-                    type="text"
-                    name="Type Surestarie"
-                    id="age"
-                    placeholder="Type Surestarie"
-                    class="formbold-form-input"
-                    [(ngModel)]="NouveauSurestarie.type"
-                  />
-                </div>
+                
+
           
                 <div class="formbold-input-wrapp formbold-mb-3" style="margin-top: 15px;">
                   <label for="firstname" class="formbold-form-label"> Achat / Vente Surestarie </label>
@@ -1325,19 +975,8 @@
                 </div>
           
 
-          
-                <div class="formbold-mb-3" style="margin-top: 15px;">
-                  <label for="age" class="formbold-form-label"> Cours Surestarie </label>
-                  <input
-                    type="text"
-                    name="age"
-                    id="age"
-                    placeholder="Cours Surestarie"
-                    class="formbold-form-input"
-                    [(ngModel)]="NouveauSurestarie.cours"
-                  />
-                </div>
-          
+
+                <!--
                 <div class="formbold-mb-3" style="margin-top: 10px;">
                   <label for="age" class="formbold-form-label"> Benefice HTV </label>
                   <input
@@ -1361,9 +1000,10 @@
                     [(ngModel)]="NouveauSurestarie.benefice_net"
                   />
                 </div>
-             
+              --->
                 <div style="margin-top: 30px;display: flex;justify-content: space-between;">
-                    <p-button label="Transport"  icon="pi pi-arrow-right"  (click)="ShowDialog('Transport')"/>          
+                    <p-button label="Transport"  icon="pi pi-arrow-right"  (click)="ShowDialog('Transport')"/>  
+                    <p-button label="Ajouter"  icon="pi pi-plus"  (click)="AddTransaction()" />          
                 </div>
           
             </div>

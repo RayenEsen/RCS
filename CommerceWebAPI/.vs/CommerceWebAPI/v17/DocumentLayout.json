@@ -1,14 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\models\\tablevalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\models\\tablevalues.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|c:\\users\\blade\\desktop\\rcs\\commercewebapi\\commercewebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAEB24EB-4A50-4C84-BBF6-2CD5BDCEB231}|CommerceWebAPI\\CommerceWebAPI.csproj|solutionrelative:commercewebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CommerceWebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TableValues.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\TableValues.cs",
-              "RelativeDocumentMoniker": "CommerceWebAPI\\Models\\TableValues.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Models\\TableValues.cs",
-              "RelativeToolTip": "CommerceWebAPI\\Models\\TableValues.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-22T16:30:32.827Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Program.cs",
               "RelativeDocumentMoniker": "CommerceWebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\CommerceWebAPI\\Program.cs",
               "RelativeToolTip": "CommerceWebAPI\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-08T18:42:44.818Z",
+              "WhenOpened": "2024-10-06T17:17:51.533Z",
               "EditorCaption": ""
             }
           ]

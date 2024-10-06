@@ -19,6 +19,8 @@ export class CalculationsComponent implements OnInit {
 
 
  list: TableValues[] = [];
+ Types = ["LCL","FCL"]
+
 
 
 
@@ -145,16 +147,9 @@ Import() {
               }
           });
           
-          // Add the importedList to your existing list
-          this.serviceT.AddMultipleTableValues(importedList).subscribe({
-              next: (response: any) => {
-                  this.list.push(...response);
-              },
-              error: (error: any) => {
-                  console.error('Error adding table values:', error);
-                  // Handle error response from server if needed
-              }
-          });
+
+          this.AddNewTableValues(importedList)
+
       };
 
       reader.readAsArrayBuffer(file);
@@ -248,9 +243,19 @@ CalculateNET(values: TableValues): number {
 }
 
 
-CalculateRetourdefond(id : number)
+CalculateRetourdefond(values : TableValues)
 {
-  
+  if (values.vente)
+  return values.vente/2;
+  else return 0
+}
+
+
+CalculateChargement_Assurance(values : TableValues)
+{
+  if (values.vente && values.achat)
+  return values.vente-values.achat;
+  else return 0
 }
 
 CalculateTotalHTV() {
@@ -274,7 +279,6 @@ CalculateTotalNET() {
   for (const item of this.list) {
       const oldsum = sum
       sum += item.benefice_net || 0; 
-      console.log(oldsum ,"+" , item.benefice_net , "= " , sum)
   }
 
   return sum
@@ -320,7 +324,6 @@ getExchangeRate() {
       this.VisibleEchange = true; // Show the exchange data after fetching
     },
     (error) => {
-      console.error('Error fetching exchange rates:', error);
     }
   );
 }
@@ -336,18 +339,104 @@ NouveauAssurance : TableValues = new TableValues;
 NouveauMagasinage : TableValues = new TableValues;
 NouveauTransport : TableValues = new TableValues;
 NouveauSurestarie : TableValues = new TableValues;
-AjoutTransaction_V2()
-{
+
+AddedTransactions : TableValues[] = []
+
+
+AjoutTransaction_V2() {
   this.AjoutVisible = true;
-  this.NouveauFret.client = "Fret"
-  this.NouveauRDF.client = "Retour de fond"
-  this.NouveauFL.client = "Frais locaux"
-  this.NouveauChargement.client = "Chargement"
-  this.NouveauAssurance.client = "Assurance"
-  this.NouveauMagasinage.client = "Magasinage"
-  this.NouveauTransport.client = "Transport"
-  this.NouveauSurestarie.client = "Surestarie"
+
+  // Initialize the client values and set generalId for each
+
+  this.NouveauClient.generalId = this.id;
+
+  this.NouveauFret.client = "Fret";
+  this.NouveauFret.generalId = this.id;
+
+  this.NouveauRDF.client = "Retour de fond";
+  this.NouveauRDF.generalId = this.id; // Set generalId for NouveauRDF
+
+  this.NouveauFL.client = "Frais locaux";
+  this.NouveauFL.generalId = this.id; // Set generalId for NouveauFL
+
+  this.NouveauChargement.client = "Chargement";
+  this.NouveauChargement.generalId = this.id; // Set generalId for NouveauChargement
+
+  this.NouveauAssurance.client = "Assurance";
+  this.NouveauAssurance.generalId = this.id; // Set generalId for NouveauAssurance
+
+  this.NouveauMagasinage.client = "Magasinage";
+  this.NouveauMagasinage.generalId = this.id; // Set generalId for NouveauMagasinage
+
+  this.NouveauTransport.client = "Transport";
+  this.NouveauTransport.generalId = this.id; // Set generalId for NouveauTransport
+
+  this.NouveauSurestarie.client = "Surestarie";
+  this.NouveauSurestarie.generalId = this.id; // Set generalId for NouveauSurestarie
 }
+
+
+
+isEmpty(tableValues: TableValues): boolean {
+  return (
+    (!tableValues.rub || tableValues.rub.trim() === "") &&
+    (!tableValues.ref || tableValues.ref.trim() === "") &&
+    (!tableValues.type || tableValues.type.trim() === "") &&
+    (tableValues.achat === undefined || tableValues.achat === 0) &&
+    (tableValues.vente === undefined || tableValues.vente === 0) &&
+    (tableValues.benefice === undefined || tableValues.benefice === 0) &&
+    (!tableValues.cours || tableValues.cours.trim() === "") &&
+    (tableValues.benefice_HTV === undefined || tableValues.benefice_HTV === 0) &&
+    (tableValues.benefice_net === undefined || tableValues.benefice_net === 0) 
+  );
+}
+
+
+async AddTransaction() {
+  const transactions = [
+    { data: this.NouveauClient, name: 'Client' },
+    { data: this.NouveauFret, name: 'Fret' },
+    { data: this.NouveauRDF, name: 'Retour de fond' },
+    { data: this.NouveauFL, name: 'Frais locaux' },
+    { data: this.NouveauChargement, name: 'Chargement' },
+    { data: this.NouveauAssurance, name: 'Assurance' },
+    { data: this.NouveauMagasinage, name: 'Magasinage' },
+    { data: this.NouveauTransport, name: 'Transport' },
+    { data: this.NouveauSurestarie, name: 'Surestarie' }
+  ];
+
+  this.AjoutVisible = true;
+
+  for (let transaction of transactions) {
+    if (!this.isEmpty(transaction.data)) {
+      try {
+        const response = await this.serviceT.AddTableValues(this.id).toPromise();
+        Object.assign(response, transaction.data); // Copy all fields
+        this.list.push(response);
+      } catch (error) {
+        console.error(`Failed to add ${transaction.name}`, error);
+      }
+    }
+  }
+
+  // Hide form when done
+  this.saveValues()
+  this.AjoutVisible = false;
+}
+
+
+
+AddNewTableValues(Array : TableValues[])
+{
+  this.serviceT.AddMultipleTableValues(Array).subscribe({ 
+    next : (response) => {
+      this.list.push(...response);
+      this.VisibleEchange = false;
+    }
+   },
+  )
+}
+
 
 Client = true;
 Fret = false;
@@ -358,6 +447,10 @@ Assurance = false;
 Magasinage = false;
 Transport = false;
 surestarie = false;
+
+
+
+
 
 ShowDialog(name: string) {
   // Set all values to false first, but handle the default `Client = true` case
@@ -408,7 +501,6 @@ ShowDialog(name: string) {
       this.surestarie = true;
       break;
     default:
-      console.log('Invalid name');
       break;
   }
 }
