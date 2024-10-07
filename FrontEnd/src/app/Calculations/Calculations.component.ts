@@ -217,7 +217,29 @@ Calculatemagasinage(values: TableValues) {
   }
 }
 
+CalculateTransport(values : TableValues)
+{
+  if (values && values.vente !== undefined && values.achat !== undefined) {
+    values.benefice = values.vente - values.achat
+    return values.vente - values.achat;
+} else {
+    return 0;
+}
+}
+
+CalculateSurestarie(values : TableValues)
+{
+  if (values && values.vente !== undefined && values.achat !== undefined) {
+    values.benefice = (values.vente - values.achat ) / 2
+    return values.vente - values.achat;
+} else {
+    return 0;
+}
+
+}
+
 CalculateNET(values: TableValues): number {
+  console.log(values)
   if(values.benefice)
   {
     if(values.cours!=="")
@@ -245,8 +267,11 @@ CalculateNET(values: TableValues): number {
 
 CalculateRetourdefond(values : TableValues)
 {
-  if (values.vente)
-  return values.vente/2;
+  if (values && values.vente !== undefined && values.achat !== undefined) 
+  {
+    values.benefice =  (values.vente - values.achat ) / 2
+    return values.vente/2;
+  }
   else return 0
 }
 
@@ -254,7 +279,10 @@ CalculateRetourdefond(values : TableValues)
 CalculateChargement_Assurance(values : TableValues)
 {
   if (values.vente && values.achat)
-  return values.vente-values.achat;
+  {
+    values.benefice = values.vente-values.achat;
+    return values.vente-values.achat;
+  }
   else return 0
 }
 

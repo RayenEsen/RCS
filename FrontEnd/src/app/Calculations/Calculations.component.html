@@ -1,11 +1,11 @@
 <p-toast></p-toast>
 
-    <div >
+<div [ngStyle]="list.length >= 1 && list.length <= 8 ? {'padding-bottom': '350px'} : {}">
     
         <p-card>
 
 
-        <div *ngIf="!VisibleEchange">
+        <div *ngIf="!VisibleEchange" >
             <div style="position: sticky; top: 0; z-index: 1000;margin-bottom: 7px;" class="printable">
                 <p-menubar [model]="items"></p-menubar>
             </div>
@@ -140,38 +140,47 @@
                     
                     <td *ngIf="values.client.toLowerCase() === 'magasinage'; else otherClients"> 
                       {{ this.Calculatemagasinage(values).toFixed(3) }} DT
-                  </td>
-                  <ng-template #otherClients>
-                      <td *ngIf="values.client.toLowerCase() === 'fret' || values.client.toLowerCase() === 'frais locaux'"> 
-                          {{ this.CalculateBenifice(values).toFixed(3) }} DT
-                      </td>
-                      <td *ngIf="values.client.toLowerCase() === 'retour de fond'">
-                          {{ this.CalculateRetourdefond(values).toFixed(3) }} DT
-                      </td>
-                      <td *ngIf="values.client.toLowerCase() === 'chargement' || values.client.toLowerCase() === 'assurance'">
-                          {{ this.CalculateChargement_Assurance(values).toFixed(3) }} DT
-                      </td>
-                      <td 
-                      [pEditableColumn]="values.benefice" 
-                      pEditableColumnField="benefice" 
-                      *ngIf="values.client.toLowerCase() !== 'fret' 
-                          && values.client.toLowerCase() !== 'frais locaux' 
-                          && values.client.toLowerCase() !== 'retour de fond' 
-                          && values.client.toLowerCase() !== 'chargement' 
-                          && values.client.toLowerCase() !== 'assurance' 
-                          && values.client.toLowerCase() !== 'magasinage' 
-                          && values.client.toLowerCase() !== 'surestarie'">
-                      <p-cellEditor>
-                          <ng-template pTemplate="input">
-                              <input type="number" pInputText [(ngModel)]="values.benefice"/>
-                          </ng-template>
-                          <ng-template pTemplate="output">
-                              {{ values.benefice }} DT
-                          </ng-template>
-                      </p-cellEditor>
-                  </td>
-                  
-                  </ng-template>
+                    </td>
+                    <ng-template #otherClients>
+                        <td *ngIf="values.client.toLowerCase() === 'fret' || values.client.toLowerCase() === 'frais locaux'"> 
+                            {{ this.CalculateBenifice(values).toFixed(3) }} DT
+                        </td>
+                        <td *ngIf="values.client.toLowerCase() === 'retour de fond'">
+                            {{ this.CalculateRetourdefond(values).toFixed(3) }} DT
+                        </td>
+                        <td *ngIf="values.client.toLowerCase() === 'chargement' || values.client.toLowerCase() === 'assurance'">
+                            {{ this.CalculateChargement_Assurance(values).toFixed(3) }} DT
+                        </td>
+                        <td *ngIf="values.client.toLowerCase() === 'transport'">
+                            {{ this.CalculateTransport(values).toFixed(3) }} DT
+                        </td>
+                        <!-- Add Surestarie case -->
+                        <td *ngIf="values.client.toLowerCase() === 'surestarie'">
+                            {{ this.CalculateSurestarie(values).toFixed(3) }} DT
+                        </td>
+                        <td 
+                        [pEditableColumn]="values.benefice" 
+                        pEditableColumnField="benefice" 
+                        *ngIf="values.client.toLowerCase() !== 'fret' 
+                            && values.client.toLowerCase() !== 'frais locaux' 
+                            && values.client.toLowerCase() !== 'retour de fond' 
+                            && values.client.toLowerCase() !== 'chargement' 
+                            && values.client.toLowerCase() !== 'assurance' 
+                            && values.client.toLowerCase() !== 'magasinage' 
+                            && values.client.toLowerCase() !== 'surestarie' 
+                            && values.client.toLowerCase() !== 'transport'">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="number" pInputText [(ngModel)]="values.benefice"/>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ values.benefice }} DT
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    
+                    </ng-template>
+                    
                   
                   
 
@@ -494,6 +503,17 @@
                     </div>
               
 
+                    <div class="formbold-mb-3" style="margin-top: 15px;">
+                      <label for="age" class="formbold-form-label"> Achat de RDF *</label>
+                      <input
+                        type="number"
+                        name="Achat RDF"
+                        id="age"
+                        placeholder="Achat RDF"
+                        class="formbold-form-input"
+                        [(ngModel)]="NouveauRDF.achat"
+                      />
+                    </div>
               
                     <div class="formbold-mb-3" style="margin-top: 15px;">
                         <label for="age" class="formbold-form-label"> Vente de RDF *</label>
