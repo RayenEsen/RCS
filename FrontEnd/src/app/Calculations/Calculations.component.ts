@@ -58,7 +58,6 @@ export class CalculationsComponent implements OnInit {
     this.serviceT.GetAllTableValues(this.id).subscribe({
       next: (Response: any) => {
         this.list = Response;
-        
         // Check if the list has only 1 element and that element's client is "Nouveau Client"
         if (this.list.length === 1 && this.list[0].client === "Nouveau Client") {
           this.list = []; // Clear the list since we don't need to show it

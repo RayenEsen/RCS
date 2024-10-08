@@ -46,14 +46,21 @@ export class MainCalculationsPageComponent implements OnInit {
         }
         else
         {
-          this.list = Response;
-
+          this.list = Response.sort((a: General, b: General) => {
+            // Convert the dateDebut field to Date objects for proper comparison
+            const dateA = new Date(a.dateDebut).getTime();
+            const dateB = new Date(b.dateDebut).getTime();
+          
+            // Sort in ascending order (earliest to latest)
+            return dateA - dateB;
+          });
+                    
           const currentYear = new Date().getFullYear();
           let FilteredList = this.list.filter((item: any) => new Date(item.dateDebut).getFullYear() === currentYear)
           let montantTotalArray = FilteredList.map((item: any) => item.montantTotal); // Then map to get montantTotal
-          const monthToAdd = new Date(FilteredList[0].dateDebut).getMonth() + 1; // Ensure it's a Date object
+          const monthToAdd = new Date(FilteredList[0].dateDebut).getMonth() ; // Ensure it's a Date object
           montantTotalArray = this.AddTableFix(monthToAdd, montantTotalArray);
-
+          console.log(montantTotalArray)
 
           this.data = {
             labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
