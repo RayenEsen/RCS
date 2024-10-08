@@ -269,8 +269,11 @@
 
 
         <div style="display: flex;">
-            <h3 style="padding-left: 14px; padding-right: 15px;">TVA Total</h3>
-            <h4>Soon DT</h4>
+            <h3 style="padding-left: 14px; padding-right: 15px;">Montant Total Reel :</h3>
+            <h4>
+              {{CalculateTotalReel().toFixed(3)}} 
+              <span style="color: rgb(77, 75, 75);">(TVA = {{this.TVA.toFixed(3)}} / Facturation1 =  {{this.Facter1.toFixed(3)}} / Facturation2 = {{this.Facter2.toFixed(3)}} )</span>
+            </h4>
         </div>
 
         

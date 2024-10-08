@@ -534,5 +534,19 @@ ShowDialog(name: string) {
 }
 
 
+MontantTotals = 0;
+TVA = 0;
+Facter1 = 0;
+Facter2 = 0;
+
+CalculateTotalReel() {
+  this.MontantTotals = this.CalculateTotalNET();
+  this.TVA = (this.MontantTotals * 19) / 100;
+  this.Facter1 = this.MontantTotals + this.TVA;
+  this.Facter2 = (this.Facter1 * 3) / 100;
+  
+  return this.Facter1 - this.TVA - this.Facter2;
+}
+
 
 }

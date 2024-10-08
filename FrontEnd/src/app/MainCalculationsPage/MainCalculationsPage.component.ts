@@ -175,6 +175,22 @@ export class MainCalculationsPageComponent implements OnInit {
     }
 }
 
+TVA = 19;  // TVA is a constant at 19%
+
+RealTotal() {
+  let S: number = 0;  // Initialize the total
+  for (let i = 0; i < this.list.length; i++) {
+    const montantTotal = this.list[i].montantTotal;
+    
+    // Calculate the total after deducting 3% and the TVA percentage
+    const deduction = (montantTotal * 3) / 100 + (montantTotal * this.TVA) / 100;
+    S += montantTotal - deduction;
+  }
+
+  return S;  // Return the calculated total
+}
+
+
 
 
 }
