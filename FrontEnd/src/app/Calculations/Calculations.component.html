@@ -143,7 +143,7 @@
                     </td>
                     <ng-template #otherClients>
                         <td *ngIf="values.client.toLowerCase() === 'fret' || values.client.toLowerCase() === 'frais locaux'"> 
-                            {{ this.CalculateBenifice(values).toFixed(3) }} DT
+                            {{ this.CalculateBenifice(values).toFixed(3) }} {{Currency(values.cours)}}
                         </td>
                         <td *ngIf="values.client.toLowerCase() === 'retour de fond'">
                             {{ this.CalculateRetourdefond(values).toFixed(3) }} DT
@@ -170,12 +170,12 @@
                             && values.client.toLowerCase() !== 'surestarie' 
                             && values.client.toLowerCase() !== 'transport'">
                         <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="number" pInputText [(ngModel)]="values.benefice"/>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ values.benefice }} DT
-                            </ng-template>
+                          <ng-template pTemplate="input">
+                              <input type="number" pInputText [(ngModel)]="values.benefice"/>
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{ values.benefice }} {{ values.client.toLowerCase() === 'fret' ? '' : 'DT' }}
+                          </ng-template>
                         </p-cellEditor>
                     </td>
                     
@@ -202,8 +202,9 @@
                     </td>
 
 
-                    <td>
-                        {{this.CalculateNET(values).toFixed(3) }} DT
+                    <td  >
+                        {{this.CalculateNET(values).toFixed(3) }} DT 
+                        
                     </td>
 
                 <tr>
@@ -212,7 +213,15 @@
             <ng-template pTemplate="footer" >
                 <tr class="printable">
                     <td colspan="9" class="text-right">Totale</td>
-                    <td>{{this.CalculateTotalHTV().toFixed(3) }} DT</td> 
+                    <td>
+                      {{ this.CalculateTotalHTV().toFixed(3) }} DT 
+                      <i pTooltip="{{ Calculate_HTV_Total_TVA().toFixed(3) }}" 
+                         ngClass="clickable"  
+                         tooltipPosition="bottom"  
+                         class="pi pi-info-circle" 
+                         style="color: rgb(0, 0, 0)">
+                      </i>
+                  </td>                    
                     <td>{{this.CalculateTotalNET().toFixed(3) }} DT</td>
                 </tr>
             </ng-template>

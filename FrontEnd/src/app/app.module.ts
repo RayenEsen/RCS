@@ -28,6 +28,7 @@ import { RippleModule } from 'primeng/ripple';
 import { FooterComponent } from './footer/footer.component';
 import { DialogModule } from 'primeng/dialog';
 import { StepperModule } from 'primeng/stepper';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [								
@@ -60,6 +61,7 @@ import { StepperModule } from 'primeng/stepper';
     RippleModule,
     DialogModule,
     StepperModule,
+    TooltipModule,
     ],
   providers: [MessageService , ConfirmationService],
   bootstrap: [AppComponent]

@@ -548,4 +548,14 @@ CalculateTotalReel() {
 }
 
 
+Calculate_HTV_Total_TVA()
+{
+  return (this.CalculateTotalHTV() * 19)/100
+}
+
+
+Currency(cours: string): string {
+  return cours.replace(/[0-9.]/g, '');
+}
+
 }
