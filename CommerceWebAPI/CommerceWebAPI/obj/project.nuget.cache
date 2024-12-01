@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0lmJwH3235E=",
+  "dgSpecHash": "XXJebiSwawQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\CommerceWebAPI.csproj",
+  "projectFilePath": "C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\CommerceWebAPI\\CommerceWebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BLADE\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\BLADE\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

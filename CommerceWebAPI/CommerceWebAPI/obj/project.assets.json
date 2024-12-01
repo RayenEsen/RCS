@@ -8260,11 +8260,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\CommerceWebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\CommerceWebAPI\\CommerceWebAPI.csproj",
       "projectName": "CommerceWebAPI",
-      "projectPath": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\CommerceWebAPI.csproj",
+      "projectPath": "C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\CommerceWebAPI\\CommerceWebAPI.csproj",
       "packagesPath": "C:\\Users\\BLADE\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\BLADE\\Desktop\\RCS\\CommerceWebAPI\\CommerceWebAPI\\obj\\",
+      "outputPath": "C:\\Users\\BLADE\\Desktop\\Work Folder\\RCS\\CommerceWebAPI\\CommerceWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\BLADE\\AppData\\Roaming\\NuGet\\NuGet.Config",
