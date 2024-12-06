@@ -6,7 +6,25 @@
 </p-card>
 
 <p-card>
-
+    <div class="mb-3" style="padding-bottom: 10px; text-align: right;">
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-left" 
+            (onClick)="prev()" 
+            [disabled]="isFirstPage()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button" 
+            icon="pi pi-refresh" 
+            (onClick)="reset()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-right" 
+            (onClick)="next()" 
+            [disabled]="isLastPage()" 
+            styleClass="p-button-text" />
+    </div>
     <div style="margin-bottom: 7px;">
         <p-menubar [model]="items"></p-menubar>
     </div>
@@ -16,15 +34,23 @@
   <p-table 
   dataKey="id" 
   selectionMode="multiple" 
+  
+  [paginator]="true"
+  [rows]="12"
+  [first]="first"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  (onPage)="pageChange($event)"
+  [rowsPerPageOptions]="[3, 6, 12]"
 
   [(contextMenuSelection)]="selectedMainCalculation" 
   [contextMenu]="cm" 
-
   [scrollable]="true" 
-  scrollHeight="630px" 
+  scrollHeight="730px" 
   [reorderableColumns]="true" 
   selectionMode="single"
   [value]="list"
+
   [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template pTemplate="header">
           <tr>

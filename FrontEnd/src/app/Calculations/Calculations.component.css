@@ -1,10 +1,35 @@
 ::ng-deep .p-card {
-    margin-top: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
-    transition: transform 0.3s; /* Add a transition for smooth animation */
+  margin-top: 50px;
+  margin-left: 200px;
+  margin-right: 200px;
+  transition: transform 0.3s; /* Add a transition for smooth animation */
 }
 
+/* Tablet size (approximately ≤ 1024px) */
+@media (max-width: 1024px) {
+  ::ng-deep .p-card {
+      margin-left: 50px;
+      margin-right: 50px;
+  }
+}
+
+/* Mobile size (approximately ≤ 768px) */
+@media (max-width: 768px) {
+  ::ng-deep .p-card {
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-top: 30px; /* You can adjust the top margin if necessary */
+  }
+}
+
+/* Extra small devices (above 480px) */
+@media (max-width: 480px) {
+  ::ng-deep .p-card {
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 20px; /* Adjust for smaller devices */
+  }
+}
 
 @media print {
     /* Reset margins for the whole page */
@@ -484,3 +509,4 @@ a.text-white:focus {
   width: 750px;
   color: #6b7280;
 }
+

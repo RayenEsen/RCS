@@ -12,4 +12,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  closeMenu() {
+    const clickInput = document.getElementById("click") as HTMLInputElement;
+    if (clickInput) {
+      clickInput.checked = false; // Uncheck the checkbox to hide the menu
+    }
+  }
+
 }

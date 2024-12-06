@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("SpecificOriginPolicy", builder =>
     {
         // Allowing multiple origins
-        builder.WithOrigins("http://192.168.1.18:81", "http://localhost:4200") // Added localhost
+        builder.WithOrigins("http://192.168.1.200:81", "http://localhost:4200") // Added localhost
             .AllowAnyMethod() // Allow any method
             .AllowAnyHeader() // Allow any headers
             .AllowCredentials(); // Allow credentials if needed

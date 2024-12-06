@@ -198,6 +198,33 @@ RealTotal() {
 }
 
 
+first = 0;
 
+rows = 12;
+
+next() {
+  this.first = this.first + this.rows;
+}
+
+prev() {
+  this.first = this.first - this.rows;
+}
+
+reset() {
+  this.first = 0;
+}
+
+pageChange(event: { first: number; rows: number; }) {
+  this.first = event.first;
+  this.rows = event.rows;
+}
+
+isLastPage(): boolean {
+  return this.list ? this.first === this.list.length - this.rows : true;
+}
+
+isFirstPage(): boolean {
+  return this.list ? this.first === 0 : true;
+}
 
 }

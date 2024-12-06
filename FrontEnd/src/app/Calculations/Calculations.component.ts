@@ -81,27 +81,121 @@ export class CalculationsComponent implements OnInit {
   }
 
 
-
   Export() {
-    // Transform the list to exclude the 'generalid', 'type', and 'ref' properties
-    const exportData = this.list.map(item => {
-      const { generalId, type, ref,id, ...exportItem } = item; // Destructure item and exclude 'generalid', 'type', 'ref'
-      return exportItem;
+    // Define the list of special categories (case-sensitive for "Fret" and case-insensitive for others)
+    const specialCategories = [
+        'Fret', 
+        'Retour de fond', 
+        'frais locaux', 
+        'Assistance', 
+        'magasinage', 
+        'Chargement', 
+        'Transport', 
+        'Surestarie',
+        'Assurance',
+        'Frais fixes'
+    ];
+
+    // Array to hold export data
+    const exportData: any[] = [];
+    let currentTotal = 0; // Track the sum of 'benefice_net' for the current group of items
+    let grandTotal = 0; // Track the grand total of 'benefice_net' for all items
+    let isFirstItem = true; // Track if this is the first item to handle the "Fret" case
+    let columns: string[] = []; // To keep track of the column names
+
+    this.list.forEach(item => {
+        const { generalId, type, ref, id, ...exportItem } = item; // Destructure item and exclude irrelevant properties
+
+        // Store the columns (keys) from the first item if it's the first iteration
+        if (isFirstItem) {
+            columns = Object.keys(exportItem);
+        }
+
+        // Replace any 0 values with an empty string in exportItem
+        Object.keys(exportItem).forEach(key => {
+            if ((exportItem as any)[key] === 0) {
+                (exportItem as any)[key] = ''; // Replace 0 with an empty string
+            }
+        });
+
+        // Check if item.client is defined and not in special categories (case-insensitive)
+        if (item.client && !specialCategories.some(cat => cat.toUpperCase() === item.client?.toUpperCase())) {
+            // If it's not the first item, insert the previous "Total" row and an empty row
+            if (!isFirstItem) {
+                // Insert the current "Total" row with the accumulated sum in the next column after 'benefice_net'
+                const totalRow: any = { client: "Total" };
+
+                // Find the index of 'benefice_net' column
+                const beneficeNetIndex = columns.indexOf('benefice_net');
+
+                // Ensure the next column exists and place the sum in that column
+                if (beneficeNetIndex !== -1 && columns[beneficeNetIndex + 1]) {
+                    totalRow[columns[beneficeNetIndex + 1]] = currentTotal; // Add sum to the next column
+                } else {
+                    totalRow['benefice_net'] = currentTotal; // If there is no next column, add the total sum in the 'benefice_net' column
+                }
+
+                // Add the "Total" row and an empty row
+                exportData.push(totalRow);
+                exportData.push({}); // Insert an empty row under the "Total" row
+
+                // Reset currentTotal for the next batch of items
+                currentTotal = 0;
+            }
+        }
+
+        // Add the current item to the export data
+        exportData.push(exportItem);
+
+        // Accumulate the total for the 'benefice_net' of the current item
+        const itemBeneficeNet = item.benefice_net || 0; // Current item's benefice_net to be added
+        currentTotal += itemBeneficeNet; // Update current total
+        grandTotal += itemBeneficeNet; // Update grand total
+
+        isFirstItem = false; // After the first item, set this to false
     });
-  
+
+    // After processing all items, append the final "Total" row
+    const finalTotalRow: any = { client: "Total" };
+
+    // Find the index of 'benefice_net' column
+    const beneficeNetIndex = columns.indexOf('benefice_net');
+
+    // Add the final grand total in the next column after 'benefice_net'
+    if (beneficeNetIndex !== -1 && columns[beneficeNetIndex + 1]) {
+        finalTotalRow[columns[beneficeNetIndex + 1]] = grandTotal; // Add grand total to the next column
+        console.log("Total = ",grandTotal)
+    } else {
+        finalTotalRow['benefice_net'] = grandTotal; // If no next column, place it in 'benefice_net'
+        console.log("Total = ",grandTotal)
+    }
+
+    // Append the final total row
+    exportData.push(finalTotalRow);
+
+    // Convert keys to uppercase and replace underscores with spaces
+    const formattedData = exportData.map(item => {
+        const formattedItem: { [key: string]: any } = {}; // Explicitly define the type of formattedItem
+        Object.keys(item).forEach(key => {
+            // Format the key: replace underscores with spaces and capitalize each word
+            const formattedKey = key
+                .replace(/_/g, ' ') // Replace underscores with spaces
+                .toUpperCase(); // Convert to uppercase
+            formattedItem[formattedKey] = item[key]; // Copy the value with the new key
+        });
+        return formattedItem;
+    });
+
     // Define the worksheet
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
-  
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(formattedData);
+
     // Define the workbook and add the worksheet to it
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  
+
     // Save the Excel file
     XLSX.writeFile(wb, 'exported_data.xlsx');
-  }
-  
-  
-
+}
 ExportPDF() {
 
 }
